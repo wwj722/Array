@@ -1,0 +1,50 @@
+Given two strings s and t, write a function to determine if t is an anagram of s.
+For example,
+s = "anagram", t = "nagaram", return true.
+s = "rat", t = "car", return false.
+
+
+solution1:
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) {
+            return false;
+        }
+        char[] ss = s.toCharArray();
+        char[] tt = t.toCharArray();
+        Arrays.sort(ss);
+        Arrays.sort(tt);
+        
+        for(int i = 0; i < s.length(); i++) {
+            if(ss[i] != tt[i]) {
+                return false;
+            }
+        }
+        return true;
+        
+    }
+}
+
+
+solution2:
+
+public class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) {
+            return false;
+        }
+        int[] alphabet = new int[26];
+        for(int i = 0; i < s.length(); i++) {
+            alphabet[s.charAt(i) - 'a']++;
+        }
+         for(int j = 0; j < s.length(); j++) {
+            alphabet[t.charAt(j) - 'a']--;
+        }
+        for(int k : alphabet) {
+            if(k != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
