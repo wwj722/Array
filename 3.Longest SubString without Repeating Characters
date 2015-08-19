@@ -9,6 +9,7 @@ public class Solution {
         boolean [] app = new boolean[256];
      for(int i = 0; i < s.length(); i++) {
      while (app[s.charAt(i)]) {
+     //j is used to record the last position of s.charAt(i).
          app[s.charAt(j)] = false;
          j++;
      } 
