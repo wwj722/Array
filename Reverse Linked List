@@ -1,0 +1,54 @@
+Reverse a singly linked list.
+
+
+solution1: interator
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode newhead = null;
+        if(head == null) {
+            return newhead;
+        }
+        while(head != null) {
+            ListNode next = head.next;
+            head.next = newhead;
+            newhead = head;
+            head = next;
+        }
+        return newhead;
+        
+    }
+}
+
+
+solution2: recurse
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        return reverseHelp(head, null);
+    }
+    
+    public ListNode reverseHelp(ListNode head, ListNode newhead) {
+        if(head == null) {
+            return newhead;
+        }
+        
+        ListNode next = head.next;
+        head.next = newhead;
+        return reverseHelp(next, head);
+    }
+}
