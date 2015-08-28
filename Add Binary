@@ -1,0 +1,53 @@
+Given two binary strings, return their sum (also a binary string).
+
+For example,
+a = "11"
+b = "1"
+Return "100".
+
+
+
+solution1:
+public class Solution {
+    public String addBinary(String a, String b) {
+        if(a.length() >= b.length()) {
+            return addBinaryHelp(a, b);
+        } else {
+            return addBinaryHelp(b, a);
+        }
+    }
+    
+    public String addBinaryHelp(String longer, String shorter) {
+        int lenA = longer.length();
+        int lenB = shorter.length();
+        int diff = lenA - lenB;
+        int quetient = 0;
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i = lenA - 1; i >= diff; i--) {
+        //char to int
+            int num1 = longer.charAt(i) -48;
+            int num2 = shorter.charAt(i - diff) -48;
+            int redidant = (quetient + num1 + num2) % 2;
+            quetient = (quetient + num1 + num2) / 2;
+            res.add(0, redidant);
+        }
+        
+        for(int j = diff - 1; j >= 0; j--) {
+            int num = longer.charAt(j) - 48;
+            int redidant = (quetient + num) % 2;
+            quetient = (quetient + num) / 2;
+             res.add(0, redidant);
+        }
+        if(quetient != 0) {
+            res.add(0, quetient);
+        }
+        StringBuffer str = new StringBuffer();
+        
+        for(int m = 0; m < res.size(); m++) {
+            str.append(res.get(m));
+        }
+    
+       return str.toString(); 
+        
+    }
+}
