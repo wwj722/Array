@@ -1,0 +1,39 @@
+Given two integers n and k, return all possible combinations of k numbers out of 1 ... n.
+
+For example,
+If n = 4 and k = 2, a solution is:
+
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
+
+
+
+solution:
+
+public class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+		List<Integer> curr = new ArrayList<>();
+		dpsHelper(res, curr, n, k, 1);
+		return res;
+	}
+
+	public static void dpsHelper(List<List<Integer>> res, List<Integer> curr, int n, int k, int level) {
+		if (curr.size() == k) {
+			res.add(new ArrayList<Integer>(curr));
+			return;
+		}
+
+		for (int i = level; i <= n; i++) {
+			curr.add(i);
+			dpsHelper(res, curr, n, k, i + 1);
+			curr.remove(curr.size() - 1);
+		}
+    }
+}
